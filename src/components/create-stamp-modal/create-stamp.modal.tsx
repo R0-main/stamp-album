@@ -14,6 +14,7 @@ function CreateStampModal({
   const defaultStampData: TStamp = {
     uuid: crypto.randomUUID(),
     name: "",
+    nwt: "",
     year: new Date().getFullYear(),
     numberOfCopies: 0,
   };
@@ -53,7 +54,15 @@ function CreateStampModal({
             type="number"
             label="Année du Timbre"
             width="20vw"
-            onChange={(value: string) => updatedStamp({ year: Number(value) })}
+            onChange={(value: string) => updatedStamp({ year: value })}
+          />
+        </div>
+
+        <div className="flex flex-col gap-10">
+          <TextInput
+            label="N°WT"
+            width="20vw"
+            onChange={(value: string) => updatedStamp({ nwt: value })}
           />
         </div>
 

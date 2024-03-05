@@ -45,11 +45,10 @@ function EditStampModal({
 
         <div className="flex flex-col gap-10">
           <TextInput
-            type="number"
             label="Année du Timbre"
             width="20vw"
-            defaultValue={stamp.year.toString()}
-            onChange={(value: string) => updateStamp({ year: Number(value) })}
+            defaultValue={stamp.year?.toString()}
+            onChange={(value: string) => updateStamp({ year: value })}
           />
         </div>
 
@@ -58,9 +57,20 @@ function EditStampModal({
             type="number"
             label="Nombre de Copies du Timbre"
             width="20vw"
-            defaultValue={stamp.numberOfCopies.toString()}
+            defaultValue={stamp.nwt}
             onChange={(value: string) =>
-              updateStamp({ numberOfCopies: Number(value) })
+              updateStamp({ nwt: value })
+            }
+          />
+        </div>
+        <div className="flex flex-col gap-10">
+          <TextInput
+            type="number"
+            label="Nombre de Copies du Timbre"
+            width="20vw"
+            defaultValue={stamp.numberOfCopies?.toString()}
+            onChange={(value: string) =>
+              updateStamp({ numberOfCopies: value })
             }
           />
         </div>

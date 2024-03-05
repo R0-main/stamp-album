@@ -13,6 +13,13 @@ function App() {
     setStamps(StampsStorage.getCurrent());
   }, [StampsStorage.getCurrent()]);
 
+  const handleSearch = (value: string) =>
+    value
+      ?.toLowerCase()
+      ?.trim()
+      ?.replace(/ /g, "")
+      ?.includes(search.toLocaleLowerCase().trim().replace(/ /g, ""));
+
   return (
     <>
       <div className="m-[4rem] flex flex-col justify-start items-center ">
@@ -30,20 +37,16 @@ function App() {
                 <tr>
                   <th>Année</th>
                   <th>Désignation</th>
+                  <th>N°WT</th>
                   <th>Nombre de Copies</th>
                 </tr>
               </thead>
               <tbody>
                 {stamps
-                  .filter((stamp) =>
-                    stamp.name
-                      .toLowerCase()
-                      .trim()
-                      .replace(/ /g, "")
-                      .includes(
-                        search.toLocaleLowerCase().trim().replace(/ /g, "")
-                      )
-                  )
+                  .filter((stamp) => {
+                    if (handleSearch(stamp.name)) return true;
+                    if (handleSearch(stamp.nwt)) return true;
+                  })
                   .sort((a, b) => a.year - b.year)
                   .map((stamp: TStamp) => (
                     <StanpCard stamp={stamp} />
