@@ -15,10 +15,11 @@ function CreateStampModal({
     uuid: crypto.randomUUID(),
     name: "",
     nwt: "",
+    duplicate : false,
     year: new Date().getFullYear(),
     numberOfCopies: 0,
   };
-  const [stamp, updatedStamp] = useReducer<
+  const [stamp, updateStamp] = useReducer<
     (prev: any, next: any) => TStamp,
     TStamp
   >(
@@ -45,7 +46,7 @@ function CreateStampModal({
           <TextInput
             label="Désignation du Timbre"
             width="20vw"
-            onChange={(value: string) => updatedStamp({ name: value })}
+            onChange={(value: string) => updateStamp({ name: value })}
           />
         </div>
 
@@ -54,7 +55,7 @@ function CreateStampModal({
             type="number"
             label="Année du Timbre"
             width="20vw"
-            onChange={(value: string) => updatedStamp({ year: value })}
+            onChange={(value: string) => updateStamp({ year: value })}
           />
         </div>
 
@@ -62,8 +63,33 @@ function CreateStampModal({
           <TextInput
             label="N°WT"
             width="20vw"
-            onChange={(value: string) => updatedStamp({ nwt: value })}
+            onChange={(value: string) => updateStamp({ nwt: value })}
           />
+        </div>
+
+        <div className="flex flex-col ">
+          <span className="label-text text-primary text-2xl font-bold mb-2">
+            Doublon
+          </span>
+          <div className="flex gap-3">
+            <span className="label-text text-primary text-xl font-bold mb-2">
+              Non
+            </span>
+            <input
+              type="checkbox"
+              className="toggle border-4 toggle-lg"
+              onClick={(e) => {
+                if (stamp.duplicate) {
+                  updateStamp({ duplicate: false });
+                } else {
+                  updateStamp({ duplicate: true });
+                }
+              }}
+            />
+            <span className="label-text text-primary text-xl font-bold mb-2">
+              Oui
+            </span>
+          </div>
         </div>
 
         <div className="flex flex-col gap-10">
@@ -72,7 +98,7 @@ function CreateStampModal({
             label="Nombre de Copies du Timbre"
             width="20vw"
             onChange={(value: string) =>
-              updatedStamp({ numberOfCopies: Number(value) })
+              updateStamp({ numberOfCopies: Number(value) })
             }
           />
         </div>

@@ -5,6 +5,7 @@ export type TStamp = {
     name : string,
     year : number,
     nwt : string,
+    duplicate : boolean,
     numberOfCopies : number,
 
 }

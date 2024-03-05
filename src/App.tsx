@@ -38,6 +38,7 @@ function App() {
                   <th>Année</th>
                   <th>Désignation</th>
                   <th>N°WT</th>
+                  <th>Doublon</th>
                   <th>Nombre de Copies</th>
                 </tr>
               </thead>

@@ -12,6 +12,7 @@ export default function StanpCard({ stamp }: { stamp: TStamp }) {
       <th className=" text-2xl">{stamp.year}</th>
       <td className=" text-2xl ">{stamp.name}</td>
       <td className=" text-2xl ">{stamp.nwt}</td>
+      <td className=" text-2xl ">{stamp.duplicate ? 'Oui' : 'Non'}</td>
       <td className=" text-2xl">{stamp.numberOfCopies}</td>
     </tr>
     {open && <EditStampModal state={open} setState={setOpen} stamp={stamp}/>}

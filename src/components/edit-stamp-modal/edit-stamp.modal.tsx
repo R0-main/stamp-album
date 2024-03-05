@@ -54,13 +54,39 @@ function EditStampModal({
 
         <div className="flex flex-col gap-10">
           <TextInput
-            type="number"
             label="N°WT"
             width="20vw"
             defaultValue={stamp.nwt}
             onChange={(value: string) => updateStamp({ nwt: value })}
           />
         </div>
+
+        <div className="flex flex-col ">
+          <span className="label-text text-primary text-2xl font-bold mb-2">
+            Doublon
+          </span>
+          <div className="flex gap-3">
+            <span className="label-text text-primary text-xl font-bold mb-2">
+              Non
+            </span>
+            <input
+              type="checkbox"
+              className="toggle border-4 toggle-lg"
+              defaultChecked={stamp.duplicate}
+              onClick={(e) => {
+                if (updatedStamp.duplicate) {
+                  updateStamp({ duplicate: false });
+                } else {
+                  updateStamp({ duplicate: true });
+                }
+              }}
+            />
+            <span className="label-text text-primary text-xl font-bold mb-2">
+              Oui
+            </span>
+          </div>
+        </div>
+
         <div className="flex flex-col gap-10">
           <TextInput
             type="number"
