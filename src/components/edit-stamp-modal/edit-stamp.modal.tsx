@@ -38,6 +38,7 @@ function EditStampModal({
           <TextInput
             label="Désignation du Timbre"
             width="20vw"
+            copyButton={true}
             defaultValue={stamp.name}
             onChange={(value: string) => updateStamp({ name: value })}
           />
@@ -47,6 +48,7 @@ function EditStampModal({
           <TextInput
             label="Année du Timbre"
             width="20vw"
+            copyButton={true}
             defaultValue={stamp.year?.toString()}
             onChange={(value: string) => updateStamp({ year: value })}
           />
@@ -56,6 +58,7 @@ function EditStampModal({
           <TextInput
             label="N°WT"
             width="20vw"
+            copyButton={true}
             defaultValue={stamp.nwt}
             onChange={(value: string) => updateStamp({ nwt: value })}
           />
@@ -92,6 +95,7 @@ function EditStampModal({
             type="number"
             label="Nombre de Copies du Timbre"
             width="20vw"
+            copyButton={true}
             defaultValue={stamp.numberOfCopies?.toString()}
             onChange={(value: string) => updateStamp({ numberOfCopies: value })}
           />

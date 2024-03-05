@@ -9,6 +9,7 @@ function TextInput({
   type,
   label,
   defaultValue,
+  copyButton,
   onChange,
 }: {
   icon?: React.ReactNode;
@@ -17,6 +18,7 @@ function TextInput({
   width?: string;
   label?: string;
   defaultValue?: string;
+  copyButton?: boolean;
   onChange: (value: string) => void;
 }) {
   const [text, setText] = useState(defaultValue || "");
@@ -29,7 +31,9 @@ function TextInput({
             <span className="label-text text-primary text-2xl font-bold">
               {label}
             </span>
-            <Button onClick={() => copyToClipboard(text)}>Copier</Button>
+            {copyButton && (
+              <Button onClick={() => copyToClipboard(text)}>Copier</Button>
+            )}
           </div>
         </>
       )}
