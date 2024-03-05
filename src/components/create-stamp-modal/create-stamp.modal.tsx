@@ -78,7 +78,7 @@ function CreateStampModal({
             <input
               type="checkbox"
               className="toggle border-4 toggle-lg"
-              onClick={(e) => {
+              onClick={() => {
                 if (stamp.duplicate) {
                   updateStamp({ duplicate: false });
                 } else {

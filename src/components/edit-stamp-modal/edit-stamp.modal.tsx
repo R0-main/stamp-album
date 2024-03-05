@@ -73,7 +73,7 @@ function EditStampModal({
               type="checkbox"
               className="toggle border-4 toggle-lg"
               defaultChecked={stamp.duplicate}
-              onClick={(e) => {
+              onClick={() => {
                 if (updatedStamp.duplicate) {
                   updateStamp({ duplicate: false });
                 } else {
