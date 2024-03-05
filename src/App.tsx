@@ -8,6 +8,7 @@ import StanpCard from "./components/stamp-card/stamp-card";
 function App() {
   const [stamps, setStamps] = useState(StampsStorage.getCurrent());
   const [search, setSearch] = useState("");
+  const [searchDuplicate, setSearchDuplicate] = useState(false);
 
   useEffect(() => {
     setStamps(StampsStorage.getCurrent());
@@ -29,6 +30,30 @@ function App() {
         <div className=" flex justify-center gap-5 w-[35vw]">
           <SearchBar onChange={(value) => setSearch(value)} />
         </div>
+        <div className="flex flex-col justify-center mt-8 items-center">
+          <span className="label-text text-primary text-2xl font-bold mb-2">
+            Afficher Uniquement les Doublons
+          </span>
+          <div className="flex gap-3">
+            <span className="label-text text-primary text-xl font-bold mb-2">
+              Non
+            </span>
+            <input
+              type="checkbox"
+              className="toggle border-4 toggle-lg"
+              onClick={() => {
+                if (searchDuplicate) {
+                  setSearchDuplicate(false);
+                } else {
+                  setSearchDuplicate(true);
+                }
+              }}
+            />
+            <span className="label-text text-primary text-xl font-bold mb-2">
+              Oui
+            </span>
+          </div>
+        </div>
         <div className=" flex flex-col flex-wrap gap-10 mt-10 bor">
           <div className="overflow-x-auto w-full">
             <table className="table w-full table-lg ">
@@ -44,6 +69,11 @@ function App() {
               </thead>
               <tbody>
                 {stamps
+                  .filter((stamp) => {
+                    if (searchDuplicate) {
+                      if (stamp.duplicate) return true;
+                    } else return true;
+                  })
                   .filter((stamp) => {
                     if (handleSearch(stamp.name)) return true;
                     if (handleSearch(stamp.nwt)) return true;
