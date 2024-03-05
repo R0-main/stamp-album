@@ -6,6 +6,7 @@ function TextInput({
   width,
   type,
   label,
+  defaultValue,
   onChange,
 }: {
   icon?: React.ReactNode;
@@ -13,15 +14,19 @@ function TextInput({
   type?: React.HTMLInputTypeAttribute;
   width?: string;
   label?: string;
+  defaultValue?: string;
   onChange?: (value: string) => void;
 }) {
   return (
     <>
-      <div className="label ">
-        <span className="label-text text-primary text-2xl font-bold">
-          {label}
-        </span>
-      </div>
+      {label && (
+        <div className={`label w-[${width || "55rem"}]`}>
+          <span className="label-text text-primary text-2xl font-bold">
+            {label}
+          </span>
+        </div>
+      )}
+
       <label
         className={`input input-primary input-lg input-bordered -mt-7 flex ${
           icon ? "justify-between" : "justify-start"
@@ -30,6 +35,7 @@ function TextInput({
         <input
           onChange={(e) => (onChange ? onChange(e.target.value) : null)}
           type={type || "text"}
+          defaultValue={defaultValue}
           className=" placeholder:font-bold placeholder:text-primary placeholder:text-xl  text-primary  font-bold text-xl w-full"
           placeholder={placeHolder}
         />

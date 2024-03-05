@@ -1,8 +1,3 @@
-export enum EStampUsage {
-    GreenLetter = "Lettre Verte",
-    PriorityLetter = "Lettre Prioritaire",
-    Other = "Autres",
-}
 
 export type TStamp = {
 
@@ -10,6 +5,5 @@ export type TStamp = {
     name : string,
     year : number,
     numberOfCopies : number,
-    usage : EStampUsage
 
 }

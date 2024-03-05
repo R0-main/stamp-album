@@ -1,13 +1,19 @@
-import React from "react";
+import { useState } from "react";
 import { TStamp } from "../../types/stamp";
+import EditStampModal from "../edit-stamp-modal/edit-stamp.modal";
 
 export default function StanpCard({ stamp }: { stamp: TStamp }) {
+
+  const [open, setOpen] = useState(false)
+
   return (
-    <tr>
-      <th>{stamp.year}</th>
-      <td>{stamp.name}</td>
-      <td>{stamp.numberOfCopies}</td>
-      <td>{stamp.usage}</td>
+    <>
+    <tr className=" break-all hover cursor-pointer" onClick={() => setOpen(true)}>
+      <th className=" text-2xl">{stamp.year}</th>
+      <td className=" text-2xl ">{stamp.name}</td>
+      <td className=" text-2xl">{stamp.numberOfCopies}</td>
     </tr>
+    {open && <EditStampModal state={open} setState={setOpen} stamp={stamp}/>}
+    </>
   );
 }

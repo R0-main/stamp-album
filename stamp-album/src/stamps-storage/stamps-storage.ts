@@ -21,5 +21,15 @@ export class StampsStorage {
         localStorage.setItem(this.STAMPS_LOCALSTORAGE_KEY, JSON.stringify([...this.getCurrent(), stamp]))
     }
     
+    public static update(stamp : TStamp)
+    {
+        localStorage.setItem(this.STAMPS_LOCALSTORAGE_KEY, JSON.stringify([...this.getCurrent().filter(stp => stp.uuid !== stamp.uuid), stamp]))
+    }
+
+    public static delete(stamp : TStamp)
+    {
+        localStorage.setItem(this.STAMPS_LOCALSTORAGE_KEY, JSON.stringify(this.getCurrent().filter(stp => stp.uuid !== stamp.uuid)))
+    }
+    
 
 }

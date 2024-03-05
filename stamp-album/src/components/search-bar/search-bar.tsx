@@ -1,8 +1,7 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import React from "react";
 import TextInput from "../text-input/text-input";
 
-function SearchBar({onChange} : {onChange : (value : string) => void}) {
+function SearchBar({ onChange }: { onChange: (value: string) => void }) {
   return (
     <TextInput
       icon={
@@ -10,7 +9,7 @@ function SearchBar({onChange} : {onChange : (value : string) => void}) {
       }
       onChange={onChange}
       placeHolder="Recherche"
-      width="50vw"
+      width="60vw"
     />
   );
 }

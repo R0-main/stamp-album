@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CreateStampModal from "./create-stamp.modal";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import Button from "../button/button";

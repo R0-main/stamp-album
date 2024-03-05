@@ -15,23 +15,22 @@ function App() {
 
   return (
     <>
-      <div className="m-[8rem] flex flex-col justify-start items-center ">
-        <div className="mb-[8rem] mx-[15rem] flex w-full justify-center">
+      <div className="m-[4rem] flex flex-col justify-start items-center ">
+        <div className="mb-[5rem] mx-[15rem] flex w-full justify-center">
           <CreateStampModalButton />
         </div>
-        <div className=" flex gap-5 ">
-          <SearchBar onChange={(value) => setSearch(value)}/>
+        <div className=" flex justify-center gap-5 w-[35vw]">
+          <SearchBar onChange={(value) => setSearch(value)} />
         </div>
-        <div className=" flex flex-col flex-wrap gap-10 mt-20 bor">
-          <div className="overflow-x-auto w-[50vw]">
-            <table className="table w-[50vw] ">
+        <div className=" flex flex-col flex-wrap gap-10 mt-10 bor">
+          <div className="overflow-x-auto w-full">
+            <table className="table w-full table-lg ">
               {/* head */}
-              <thead>
+              <thead className=" text-2xl">
                 <tr>
                   <th>Année</th>
-                  <th>Nom</th>
-                  <th>Nobre de Copie</th>
-                  <th>Type</th>
+                  <th>Désignation</th>
+                  <th>Nombre de Copies</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,6 +44,7 @@ function App() {
                         search.toLocaleLowerCase().trim().replace(/ /g, "")
                       )
                   )
+                  .sort((a, b) => a.year - b.year)
                   .map((stamp: TStamp) => (
                     <StanpCard stamp={stamp} />
                   ))}
