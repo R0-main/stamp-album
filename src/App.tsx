@@ -54,7 +54,7 @@ function App() {
             </span>
           </div>
         </div>
-        <div className="my-8">
+        <div className="mt-5 mb-2">
           <span className="label-text text-primary text-2xl font-bold">
             Timbre(s) Enregistrés : {StampsStorage.getCurrent()?.length || 0}
           </span>
