@@ -23,6 +23,14 @@ function TextInput({
 }) {
   const [text, setText] = useState(defaultValue || "");
 
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLInputElement;
+    if (target.type === 'number') {
+      target.blur();
+    }
+  };
+
+
   return (
     <>
       {label && (
@@ -48,6 +56,7 @@ function TextInput({
             onChange(e.target.value);
             setText(e.target.value);
           }}
+          onWheel={handleWheel} /* remove the wheel unwanted behavior on number input */
           type={type || "text"}
           defaultValue={defaultValue}
           className=" placeholder:font-bold placeholder:text-primary placeholder:text-xl  text-primary  font-bold text-xl w-full"
