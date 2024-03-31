@@ -14,6 +14,20 @@ function App() {
     setStamps(StampsStorage.getCurrent());
   }, [StampsStorage.getCurrent()]);
 
+  const getFilteredStamps = (): TStamp[] => {
+    return stamps
+      .filter((stamp) => {
+        if (searchDuplicate) {
+          if (stamp.duplicate) return true;
+        } else return true;
+      })
+      .filter((stamp) => {
+        if (handleSearch(stamp.name)) return true;
+        if (handleSearch(stamp.nwt)) return true;
+      })
+      .sort((a, b) => a.year - b.year);
+  };
+
   const handleSearch = (value: string) =>
     value
       ?.toLowerCase()
@@ -56,13 +70,12 @@ function App() {
         </div>
         <div className="mt-5 mb-2">
           <span className="label-text text-primary text-2xl font-bold">
-            Timbre(s) Enregistrés : {(searchDuplicate ?  StampsStorage.getCurrent().filter(stp => stp.duplicate)?.length : StampsStorage.getCurrent()?.length) || 0}
+            Timbres Enregistrés : {getFilteredStamps()?.length || 0}
           </span>
         </div>
         <div className=" flex flex-col flex-wrap gap-10 mt-10 bor">
           <div className="overflow-x-auto w-full">
             <table className="table w-full table-lg ">
-              {/* head */}
               <thead className=" text-2xl">
                 <tr>
                   <th>Année</th>
@@ -73,20 +86,9 @@ function App() {
                 </tr>
               </thead>
               <tbody>
-                {stamps
-                  .filter((stamp) => {
-                    if (searchDuplicate) {
-                      if (stamp.duplicate) return true;
-                    } else return true;
-                  })
-                  .filter((stamp) => {
-                    if (handleSearch(stamp.name)) return true;
-                    if (handleSearch(stamp.nwt)) return true;
-                  })
-                  .sort((a, b) => a.year - b.year)
-                  .map((stamp: TStamp) => (
-                    <StanpCard stamp={stamp} />
-                  ))}
+                {getFilteredStamps().map((stamp: TStamp) => (
+                  <StanpCard stamp={stamp} />
+                ))}
               </tbody>
             </table>
           </div>
