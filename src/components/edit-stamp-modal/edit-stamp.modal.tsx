@@ -114,7 +114,7 @@ function EditStampModal({
             </div>
             <div className=" flex flex-row gap-10">
               <Button>Annuler</Button>
-              <Button onClick={() => StampsStorage.update(updatedStamp)}>
+              <Button onClick={() => StampsStorage.update(updatedStamp.uuid, updatedStamp)}>
                 Enregistrer
               </Button>
             </div>

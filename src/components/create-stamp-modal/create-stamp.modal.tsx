@@ -30,6 +30,21 @@ function CreateStampModal({
     (arg: TStamp) => arg
   );
 
+  const handleSave = () => {
+    const duplicate = StampsStorage.getCurrent().find(
+      (stp) =>
+        stp.name === stamp.name.trim().toLocaleLowerCase() ||
+        (stp.nwt === stamp.nwt.trim().toLocaleLowerCase() && stp.year === stp.year)
+    );
+
+    if (duplicate) {
+      StampsStorage.update(duplicate.uuid, {
+        ...duplicate,
+        duplicate: true,
+      });
+    } else StampsStorage.save(stamp);
+  };
+
   return (
     <dialog
       id="create_stamp_modal"
@@ -108,9 +123,7 @@ function CreateStampModal({
             {/* if there is a button in form, it will close the modal */}
             <div className=" flex flex-row gap-10">
               <Button>Annuler</Button>
-              <Button onClick={() => StampsStorage.save(stamp)}>
-                Enregistrer
-              </Button>
+              <Button onClick={() => handleSave()}>Enregistrer</Button>
             </div>
           </form>
         </div>
