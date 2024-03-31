@@ -54,6 +54,11 @@ function App() {
             </span>
           </div>
         </div>
+        <div className="my-8">
+          <span className="label-text text-primary text-2xl font-bold">
+            Timbre(s) Enregistrés : {StampsStorage.getCurrent()?.length || 0}
+          </span>
+        </div>
         <div className=" flex flex-col flex-wrap gap-10 mt-10 bor">
           <div className="overflow-x-auto w-full">
             <table className="table w-full table-lg ">
