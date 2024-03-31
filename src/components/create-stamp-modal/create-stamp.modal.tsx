@@ -33,8 +33,8 @@ function CreateStampModal({
   const handleSave = () => {
     const duplicate = StampsStorage.getCurrent().find(
       (stp) =>
-        stp.name === stamp.name.trim().toLocaleLowerCase() ||
-        (stp.nwt === stamp.nwt.trim().toLocaleLowerCase() && stp.year === stp.year)
+        stp.name.trim().toLocaleLowerCase()  === stamp.name.trim().toLocaleLowerCase() ||
+        (stp.nwt.trim().toLocaleLowerCase()  === stamp.nwt.trim().toLocaleLowerCase() && stp.year === stp.year)
     );
 
     if (duplicate) {
