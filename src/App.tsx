@@ -56,7 +56,7 @@ function App() {
         </div>
         <div className="mt-5 mb-2">
           <span className="label-text text-primary text-2xl font-bold">
-            Timbre(s) Enregistrés : {StampsStorage.getCurrent()?.length || 0}
+            Timbre(s) Enregistrés : {(searchDuplicate ?  StampsStorage.getCurrent().filter(stp => stp.duplicate)?.length : StampsStorage.getCurrent()?.length) || 0}
           </span>
         </div>
         <div className=" flex flex-col flex-wrap gap-10 mt-10 bor">
