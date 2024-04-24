@@ -21,8 +21,9 @@ function App() {
           if (stamp.duplicate) return true;
         } else return true;
       })
-      .filter((stamp) => {
-        if (handleSearch(stamp.name)) return true;
+      .filter((stamp) => { 
+        if (handleSearch(stamp.name.replace(/[0-9]/g, ""))) return true;
+        if (parseInt(search.trim()) != stamp.year) return false;
         if (handleSearch(stamp.nwt)) return true;
       })
       .sort((a, b) => a.year - b.year);
