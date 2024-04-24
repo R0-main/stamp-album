@@ -56,11 +56,7 @@ function App() {
               type="checkbox"
               className="toggle border-4 toggle-lg"
               onClick={() => {
-                if (searchDuplicate) {
-                  setSearchDuplicate(false);
-                } else {
-                  setSearchDuplicate(true);
-                }
+                setSearchDuplicate(prev => !prev);
               }}
             />
             <span className="label-text text-primary text-xl font-bold mb-2">
