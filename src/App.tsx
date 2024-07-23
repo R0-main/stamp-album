@@ -4,6 +4,7 @@ import CreateStampModalButton from "./components/create-stamp-modal/create-stamp
 import { StampsStorage } from "./stamps-storage/stamps-storage";
 import { TStamp } from "./types/stamp";
 import StanpCard from "./components/stamp-card/stamp-card";
+import Button from "./components/button/button";
 
 function App() {
   const [stamps, setStamps] = useState(StampsStorage.getCurrent());
@@ -18,10 +19,10 @@ function App() {
     return stamps
       .filter((stamp) => {
         if (searchDuplicate) {
-          if (stamp.duplicate) return true;
+          if (stamp.count > 1) return true;
         } else return true;
       })
-      .filter((stamp) => { 
+      .filter((stamp) => {
         if (handleSearch(stamp.name.replace(/[0-9]/g, ""))) return true;
         if (parseInt(search.trim()) != stamp.year) return false;
         if (handleSearch(stamp.nwt)) return true;
@@ -41,6 +42,15 @@ function App() {
       <div className="m-[4rem] flex flex-col justify-start items-center ">
         <div className="mb-[5rem] mx-[15rem] flex w-full justify-center">
           <CreateStampModalButton />
+          <Button onClick={() => {
+            for (const stamp of stamps) {
+              StampsStorage.update(stamp.uuid, {
+                ...stamp,
+                count : stamp.count ? 2 : 1,
+                damage : false
+              })
+            }
+          }}>Translate</Button>
         </div>
         <div className=" flex justify-center gap-5 w-[35vw]">
           <SearchBar onChange={(value) => setSearch(value)} />
@@ -57,7 +67,7 @@ function App() {
               type="checkbox"
               className="toggle border-4 toggle-lg"
               onClick={() => {
-                setSearchDuplicate(prev => !prev);
+                setSearchDuplicate((prev) => !prev);
               }}
             />
             <span className="label-text text-primary text-xl font-bold mb-2">
@@ -79,6 +89,7 @@ function App() {
                   <th>Désignation</th>
                   <th>N°WT</th>
                   <th>Doublon</th>
+                  <th>Abîmer</th>
                   <th>Nombre de Copies</th>
                 </tr>
               </thead>

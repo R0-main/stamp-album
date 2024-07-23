@@ -15,7 +15,8 @@ function CreateStampModal({
     uuid: crypto.randomUUID(),
     name: "",
     nwt: "",
-    duplicate: false,
+    damage : false,
+    count: 1,
     year: new Date().getFullYear(),
     numberOfCopies: 0,
   };
@@ -33,14 +34,17 @@ function CreateStampModal({
   const handleSave = () => {
     const duplicate = StampsStorage.getCurrent().find(
       (stp) =>
-        stp.name.trim().toLocaleLowerCase()  === stamp.name.trim().toLocaleLowerCase() ||
-        (stp.nwt.trim().toLocaleLowerCase()  === stamp.nwt.trim().toLocaleLowerCase() && stp.year === stp.year)
+        stp.name.trim().toLocaleLowerCase() ===
+          stamp.name.trim().toLocaleLowerCase() ||
+        (stp.nwt.trim().toLocaleLowerCase() ===
+          stamp.nwt.trim().toLocaleLowerCase() &&
+          stp.year === stp.year)
     );
 
     if (duplicate) {
       StampsStorage.update(duplicate.uuid, {
         ...duplicate,
-        duplicate: true,
+        count: 2,
       });
     } else StampsStorage.save(stamp);
   };
@@ -82,9 +86,21 @@ function CreateStampModal({
           />
         </div>
 
+        <div className="flex flex-col gap-10">
+          <TextInput
+            type="number"
+            label="Doublon"
+            width="20vw"
+            defaultValue={defaultStampData.count.toString()}
+            onChange={(value: string) =>
+              updateStamp({ count: parseInt(value) })
+            }
+          />
+        </div>
+
         <div className="flex flex-col ">
           <span className="label-text text-primary text-2xl font-bold mb-2">
-            Doublon
+            Abîmer
           </span>
           <div className="flex gap-3">
             <span className="label-text text-primary text-xl font-bold mb-2">
@@ -93,12 +109,9 @@ function CreateStampModal({
             <input
               type="checkbox"
               className="toggle border-4 toggle-lg"
+              defaultChecked={stamp.damage}
               onClick={() => {
-                if (stamp.duplicate) {
-                  updateStamp({ duplicate: false });
-                } else {
-                  updateStamp({ duplicate: true });
-                }
+                updateStamp({ damage: !stamp.damage });
               }}
             />
             <span className="label-text text-primary text-xl font-bold mb-2">

@@ -64,9 +64,19 @@ function EditStampModal({
           />
         </div>
 
+        <div className="flex flex-col gap-10">
+          <TextInput
+            type="number"
+            label="Doublon"
+            width="20vw"
+            defaultValue={stamp.count.toString()}
+            onChange={(value: string) => updateStamp({ count: parseInt(value) })}
+          />
+        </div>
+
         <div className="flex flex-col ">
           <span className="label-text text-primary text-2xl font-bold mb-2">
-            Doublon
+            Abîmer
           </span>
           <div className="flex gap-3">
             <span className="label-text text-primary text-xl font-bold mb-2">
@@ -75,13 +85,9 @@ function EditStampModal({
             <input
               type="checkbox"
               className="toggle border-4 toggle-lg"
-              defaultChecked={stamp.duplicate}
+              defaultChecked={stamp.damage}
               onClick={() => {
-                if (updatedStamp.duplicate) {
-                  updateStamp({ duplicate: false });
-                } else {
-                  updateStamp({ duplicate: true });
-                }
+                updateStamp({ damage: !stamp.damage });
               }}
             />
             <span className="label-text text-primary text-xl font-bold mb-2">
@@ -114,7 +120,11 @@ function EditStampModal({
             </div>
             <div className=" flex flex-row gap-10">
               <Button>Annuler</Button>
-              <Button onClick={() => StampsStorage.update(updatedStamp.uuid, updatedStamp)}>
+              <Button
+                onClick={() =>
+                  StampsStorage.update(updatedStamp.uuid, updatedStamp)
+                }
+              >
                 Enregistrer
               </Button>
             </div>
