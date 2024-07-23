@@ -4,6 +4,7 @@ import CreateStampModalButton from "./components/create-stamp-modal/create-stamp
 import { StampsStorage } from "./stamps-storage/stamps-storage";
 import { TStamp } from "./types/stamp";
 import StanpCard from "./components/stamp-card/stamp-card";
+import Button from "./components/button/button";
 
 function App() {
   const [stamps, setStamps] = useState(StampsStorage.getCurrent());
@@ -41,6 +42,16 @@ function App() {
       <div className="m-[4rem] flex flex-col justify-start items-center ">
         <div className="mb-[5rem] mx-[15rem] flex w-full justify-center">
           <CreateStampModalButton />
+          <Button onClick={() => {
+            for (const stamp of stamps) {
+              StampsStorage.update(stamp.uuid, {
+                ...stamp,
+                // @ts-ignore
+                count : stamp.count === true ? 2 : 1,
+                damage : false
+              })
+            }
+          }}>Translate</Button>
         </div>
         <div className=" flex justify-center gap-5 w-[35vw]">
           <SearchBar onChange={(value) => setSearch(value)} />
