@@ -4,7 +4,6 @@ import CreateStampModalButton from "./components/create-stamp-modal/create-stamp
 import { StampsStorage } from "./stamps-storage/stamps-storage";
 import { TStamp } from "./types/stamp";
 import StanpCard from "./components/stamp-card/stamp-card";
-import Button from "./components/button/button";
 
 function App() {
   const [stamps, setStamps] = useState(StampsStorage.getCurrent());
