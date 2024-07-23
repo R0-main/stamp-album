@@ -15,7 +15,7 @@ function CreateStampModal({
     uuid: crypto.randomUUID(),
     name: "",
     nwt: "",
-    damage : false,
+    damage: false,
     count: 1,
     year: new Date().getFullYear(),
     numberOfCopies: 0,

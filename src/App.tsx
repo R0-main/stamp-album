@@ -4,11 +4,13 @@ import CreateStampModalButton from "./components/create-stamp-modal/create-stamp
 import { StampsStorage } from "./stamps-storage/stamps-storage";
 import { TStamp } from "./types/stamp";
 import StanpCard from "./components/stamp-card/stamp-card";
+import Button from "./components/button/button";
 
 function App() {
   const [stamps, setStamps] = useState(StampsStorage.getCurrent());
   const [search, setSearch] = useState("");
   const [searchDuplicate, setSearchDuplicate] = useState(false);
+  const [searchDamage, setSearchDamage] = useState(false);
 
   useEffect(() => {
     setStamps(StampsStorage.getCurrent());
@@ -19,6 +21,11 @@ function App() {
       .filter((stamp) => {
         if (searchDuplicate) {
           if (stamp.count > 1) return true;
+        } else return true;
+      })
+      .filter((stamp) => {
+        if (searchDamage) {
+          if (stamp.damage) return true;
         } else return true;
       })
       .filter((stamp) => {
@@ -41,28 +48,67 @@ function App() {
       <div className="m-[4rem] flex flex-col justify-start items-center ">
         <div className="mb-[5rem] mx-[15rem] flex w-full justify-center">
           <CreateStampModalButton />
+          <Button
+            onClick={() => {
+              for (const stamp of stamps) {
+                StampsStorage.update(stamp.uuid, {
+                  ...stamp,
+                  // @ts-ignore
+                  count: stamp.duplicate ? 1 : 0,
+                  damage: false,
+                });
+              }
+            }}
+          >
+            Translate
+          </Button>
         </div>
         <div className=" flex justify-center gap-5 w-[35vw]">
           <SearchBar onChange={(value) => setSearch(value)} />
         </div>
         <div className="flex flex-col justify-center mt-8 items-center">
-          <span className="label-text text-primary text-2xl font-bold mb-2">
-            Afficher Uniquement les Doublons
-          </span>
-          <div className="flex gap-3">
-            <span className="label-text text-primary text-xl font-bold mb-2">
-              Non
-            </span>
-            <input
-              type="checkbox"
-              className="toggle border-4 toggle-lg"
-              onClick={() => {
-                setSearchDuplicate((prev) => !prev);
-              }}
-            />
-            <span className="label-text text-primary text-xl font-bold mb-2">
-              Oui
-            </span>
+          <div className="flex w-full">
+            <div className="card  rounded-box grid h-20 flex-grow place-items-center">
+              <span className="label-text text-primary text-2xl font-bold mb-2">
+                Afficher Uniquement les Doublons
+              </span>
+              <div className="flex gap-3">
+                <span className="label-text text-primary text-xl font-bold mb-2">
+                  Non
+                </span>
+                <input
+                  type="checkbox"
+                  className="toggle border-4 toggle-lg"
+                  onClick={() => {
+                    setSearchDuplicate((prev) => !prev);
+                  }}
+                />
+                <span className="label-text text-primary text-xl font-bold mb-2">
+                  Oui
+                </span>
+              </div>
+            </div>
+            <div className="divider divider-horizontal"></div>
+            <div className="card  rounded-box grid h-20 flex-grow place-items-center">
+              <span className="label-text text-primary text-2xl font-bold mb-2">
+                Afficher Uniquement les Abîmées
+              </span>
+              <div className="flex gap-3">
+                <span className="label-text text-primary text-xl font-bold mb-2">
+                  Non
+                </span>
+                <input
+                  type="checkbox"
+                  className="toggle border-4 toggle-lg"
+                  onClick={() => {
+                    setSearchDamage((prev) => !prev);
+                  }}
+                />
+                <span className="label-text text-primary text-xl font-bold mb-2">
+                  Oui
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="mt-5 mb-2">
