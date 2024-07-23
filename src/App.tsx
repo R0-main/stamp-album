@@ -47,7 +47,7 @@ function App() {
               StampsStorage.update(stamp.uuid, {
                 ...stamp,
                 // @ts-ignore
-                count : stamp.count === true ? 2 : 1,
+                count : stamp.duplicate ? 2 : 1,
                 damage : false
               })
             }
