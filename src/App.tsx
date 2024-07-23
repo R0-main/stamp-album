@@ -42,15 +42,6 @@ function App() {
       <div className="m-[4rem] flex flex-col justify-start items-center ">
         <div className="mb-[5rem] mx-[15rem] flex w-full justify-center">
           <CreateStampModalButton />
-          <Button onClick={() => {
-            for (const stamp of stamps) {
-              StampsStorage.update(stamp.uuid, {
-                ...stamp,
-                count : stamp.count ? 2 : 1,
-                damage : false
-              })
-            }
-          }}>Translate</Button>
         </div>
         <div className=" flex justify-center gap-5 w-[35vw]">
           <SearchBar onChange={(value) => setSearch(value)} />
