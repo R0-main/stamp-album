@@ -16,7 +16,7 @@ function CreateStampModal({
     name: "",
     nwt: "",
     damage: false,
-    count: 1,
+    count: 0,
     year: new Date().getFullYear(),
     numberOfCopies: 0,
   };
@@ -44,7 +44,7 @@ function CreateStampModal({
     if (duplicate) {
       StampsStorage.update(duplicate.uuid, {
         ...duplicate,
-        count: 2,
+        count: duplicate.count + 1,
       });
     } else StampsStorage.save(stamp);
   };
